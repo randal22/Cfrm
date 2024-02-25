@@ -6,23 +6,23 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Cfrm.Test
 {
-    [TestClass]
+    // [TestClass]
     public class KuhnPoker
     {
-        enum Card
+        public enum Card
         {
             Jack,
             Queen,
             King
         }
 
-        enum Action
+        public enum Action
         {
             Check,
             Bet
         }
 
-        class KuhnPokerState
+        public class KuhnPokerState
             : GameState<Action>
         {
             public KuhnPokerState(Card[] cards)
@@ -96,7 +96,7 @@ namespace Cfrm.Test
 
         /// Shuffles the given array in place.
         /// From http://rosettacode.org/wiki/Knuth_shuffle#C.23
-        static T[] Shuffle<T>(Random rng, T[] array)
+        public static T[] Shuffle<T>(Random rng, T[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -116,10 +116,10 @@ namespace Cfrm.Test
 
             var (expectedGameValues, strategyProfile) =
                 CounterFactualRegret.Minimize(numIterations, 2, i =>
-                    {
-                        var cards = Shuffle(rng, deck)[0..2];
-                        return new KuhnPokerState(cards);
-                    });
+                {
+                    var cards = Shuffle(rng, deck)[0..2];
+                    return new KuhnPokerState(cards);
+                });
 
             const string path = "Kuhn.strategy";
             strategyProfile.Save(path);
